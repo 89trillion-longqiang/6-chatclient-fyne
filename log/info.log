@@ -1,0 +1,29 @@
+2021/06/18 18:04:44 connecting to ws://localhost:8080/ws
+2021/06/18 18:04:53 connecting to ws://localhost:8080/ws
+2021/06/18 18:05:32 connecting to ws://localhost:8080/ws
+2021/06/18 18:23:32 connecting to ws://localhost:8080/ws
+2021/06/18 18:23:49 connecting to ws://localhost:8080/ws
+2021/06/18 18:23:55 connecting to ws://localhost:8080/ws
+2021/06/18 18:25:56 connecting to ws://localhost:8080/ws
+2021/06/18 18:26:05 connecting to ws://localhost:8080/ws
+2021/06/18 18:28:55 connecting to ws://localhost:8080/ws
+2021/06/18 18:29:01 connecting to ws://localhost:8080/ws
+2021/06/18 18:33:43 connecting to ws://localhost:8080/ws
+2021/06/18 19:28:48 connecting to ws://localhost:8080/ws
+2021/06/18 19:28:48 dial: dial tcp [::1]:8080: connect: connection refused
+2021/06/18 19:28:48 c *websocket.Conn is nil
+2021/06/18 19:29:20 connecting to ws://localhost:8080/ws
+2021/06/18 19:42:38 connecting to ws://localhost:8080/ws
+2021/06/18 19:42:49 connecting to ws://localhost:8080/ws
+2021/06/18 19:42:59 connecting to ws://localhost:8080/ws
+2021/06/18 19:43:18 connecting to ws://localhost:8080/ws
+2021/06/18 19:43:22 connecting to ws://localhost:8080/ws
+2021/06/18 19:43:43 connecting to ws://localhost:8080/ws
+2021/06/18 19:43:45 connecting to ws://localhost:8080/ws
+2021/06/18 19:43:46 connecting to ws://localhost:8080/ws
+2021/06/18 19:45:23 connecting to ws://localhost:8080/ws
+2021/06/18 19:45:32 connecting to ws://localhost:8080/ws
+2021/06/18 20:05:15 connecting to ws://localhost:8080/ws
+2021/06/18 20:05:39 connecting to ws://localhost:8080/ws
+2021/06/18 20:05:53 connecting to ws://localhost:8080/ws
+2021/06/18 20:28:20 connecting to ws://localhost:8080/ws
