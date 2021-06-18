@@ -5,7 +5,7 @@
 运用fyne 完成gui设计 
 ```
 
-
+#目录结构
 ```
 ├── README.md               #介绍
 ├── go.mod
@@ -31,6 +31,18 @@
 ```
 go run main.go
 ```
+
+#使用方法
+```
+运行后，输入username 与 server 后 点击con按钮 状态显示为OK后 
+即可在下面的输入框输入信息，点击发送即可完成发送。
+```
 #运行截图
 ![xxx](./pic/p1.png)
 
+
+#第三方库
+```
+google.golang.org/protobuf      通信数据的传输格式 protobuf
+fyne.io/fyne                    GUI界面的设计与实现
+```
