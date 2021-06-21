@@ -26,6 +26,24 @@
     └── view.go
 
 ```
+
+
+#代码逻辑分层
+| 层     | 文件夹|主要职责 |调用关系|
+| :----: | :----|:---- | :-----|
+|view    | /view|界面展示 |调用handle|
+|handle  | /handle|处理界面的数据 |调用router module 被 view调用|
+|router  | /router|负责与服务器连接|被handle调用|
+
+#存储设计
+##HandleChan
+| 内容 | 类型 |  说明 |
+| :----:| :---- | :----|
+|UserListChan|chan int|用于发送用户列表的chan|
+|UserChatChan |chan int|用于发送聊天信息的chan|
+|UserListMsg |string|发送用户列表信息|
+|UserChatMsg |string|发送聊天信息|
+
 #运行方式
 
 ```
@@ -34,7 +52,7 @@ go run main.go
 
 #使用方法
 ```
-运行后，输入username 与 server 后 点击con按钮 状态显示为OK后 
+运行后，输入username 与 server（ws://localhost:8080/ws后 点击con按钮 状态显示为OK后 
 即可在下面的输入框输入信息，点击发送即可完成发送。
 ```
 #运行截图
