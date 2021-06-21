@@ -1,12 +1,12 @@
 package handle
 
 import (
-	"chatClient/module"
 	"fmt"
 	"log"
 	"time"
 
-	"chatClient/protobuf"
+	"chatClient/module"
+	"chatClient/module/protobuf"
 	"chatClient/router"
 	"github.com/gorilla/websocket"
 	"google.golang.org/protobuf/proto"
@@ -51,7 +51,7 @@ func HandleDisCon() string {
 
 	err := c.Close()
 	if err != nil {
-		return ""
+		return "Close error"
 	}
 	return ""
 }
@@ -76,7 +76,7 @@ func HandReadMsg(){
 	c.SetReadLimit(module.MaxMessageSize)
 	err := c.SetReadDeadline(time.Now().Add(module.PongWait))
 	if err != nil {
-		return 
+		return
 	}
 	c.SetPongHandler(func(string) error { c.SetReadDeadline(time.Now().Add(module.PongWait)); return nil })
 

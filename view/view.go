@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"chatClient/handle"
+	"chatClient/module"
 	"fyne.io/fyne"
 	"fyne.io/fyne/app"
 	"fyne.io/fyne/container"
@@ -11,95 +12,87 @@ import (
 	"fyne.io/fyne/widget"
 )
 
-type View struct {
-	UserList *widget.Label
-	UserChat * widget.Label
-}
-
-var ViewLable View
-
-
+var ViewCtrl  module.ViewCtrlModule
 func SetUpView() fyne.Window{
 
 	myApp := app.New()
 	myWin := myApp.NewWindow("CHAT")
 	myWin.Resize(fyne.Size{Width: 500, Height: 500})
 
-	nameEntry := widget.NewEntry()
-	nameEntry.SetPlaceHolder("input name")
-	nameEntry.OnChanged = func(content string) {
-		handle.SetName(nameEntry.Text)
-		fmt.Println("name:", nameEntry.Text, "entered")
+
+	ViewCtrl.NameEntry = widget.NewEntry()
+	ViewCtrl.NameEntry.SetPlaceHolder("input name")
+	ViewCtrl.NameEntry.OnChanged = func(content string) {
+		handle.SetName(ViewCtrl.NameEntry.Text)
+		fmt.Println("name:", ViewCtrl.NameEntry.Text, "entered")
 	}
-	nameBox := widget.NewHBox(widget.NewLabel("Name"), layout.NewSpacer(), nameEntry)
+	nameBox := widget.NewHBox(widget.NewLabel("Name"), layout.NewSpacer(), ViewCtrl.NameEntry)
 
 
-	serEntry := widget.NewEntry()
-	serEntry.SetPlaceHolder("input  server        ")
-	serEntry.OnChanged = func(content string) {
-		handle.SetServer(serEntry.Text)
-		fmt.Println("name:", serEntry.Text, "entered")
+	ViewCtrl.SerEntry = widget.NewEntry()
+	ViewCtrl.SerEntry.SetPlaceHolder("input  server        ")
+	ViewCtrl.SerEntry.OnChanged = func(content string) {
+		handle.SetServer(ViewCtrl.SerEntry.Text)
+		fmt.Println("name:", ViewCtrl.SerEntry.Text, "entered")
 	}
 
-	serverLab := widget.Label{Text: "server"}
-	userList := widget.NewLabel("userList")
-	statuLable := widget.NewLabel("status:NO")
+	ViewCtrl.ServerLab = widget.NewLabel( "server")
+	ViewCtrl.UserList = widget.NewLabel("userList")
+	ViewCtrl.StatuLable = widget.NewLabel("status:NO")
 
 
 
-	sLine1 := widget.NewSeparator()				///分割线1
-	sLine1.Resize(fyne.Size{Width: 500, Height: 1})
-	sLine2 := widget.NewSeparator()				///分割线2
-	sLine2.Resize(fyne.Size{Width: 500, Height: 1})
-	sLine3 := widget.NewSeparator()				///分割线3
-	sLine3.Resize(fyne.Size{Width: 500, Height: 1})
+	ViewCtrl.SLine1 = widget.NewSeparator()				///分割线1
+	ViewCtrl.SLine1.Resize(fyne.Size{Width: 500, Height: 1})
+	ViewCtrl.SLine2 = widget.NewSeparator()				///分割线2
+	ViewCtrl.SLine2.Resize(fyne.Size{Width: 500, Height: 1})
+	ViewCtrl.SLine3 = widget.NewSeparator()				///分割线3
+	ViewCtrl.SLine3.Resize(fyne.Size{Width: 500, Height: 1})
 
 
-	userChat  := widget.NewLabel("=============chat=============")
+	ViewCtrl.UserChat  = widget.NewLabel("=============chat=============")
 
-	ViewLable.UserList = userList
-	ViewLable.UserChat = userChat
-	sU := widget.NewVScrollContainer(userChat)
+	sU := widget.NewVScrollContainer(ViewCtrl.UserChat)
 	go UpdataUserChat()
 	go UpdatuserList()
 
-	sendtext := widget.NewEntry()
-	sendtext.SetPlaceHolder("Input")
-	conBtn := widget.NewButton("con", func() {///conBtn
+	ViewCtrl.Sendtext = widget.NewEntry()
+	ViewCtrl.Sendtext.SetPlaceHolder("Input")
+	ViewCtrl.ConBtn = widget.NewButton("con", func() {///conBtn
 		if handle.Username == "" || handle.Server == ""{
 			return
 		}
 		if handle.HandleSetupHttp() != "" {
 			return
 		}
-		statuLable.SetText("status:OK")
+		ViewCtrl.StatuLable.SetText("status:OK")
 	})
-	conBtn.Resize(fyne.Size{Width: 50, Height: 100})
-	disConBtn := widget.NewButton("disCon", func() {///disConBtn
-		if statuLable.Text != "status:OK" {
+	ViewCtrl.ConBtn.Resize(fyne.Size{Width: 50, Height: 100})
+	ViewCtrl.DisConBtn = widget.NewButton("disCon", func() {///disConBtn
+		if ViewCtrl.StatuLable.Text != "status:OK" {
 			return
 		}
 		if handle.HandleDisCon() != ""{
 			return
 		}
-		statuLable.SetText("status:NO")
+		ViewCtrl.StatuLable.SetText("status:NO")
 	})
-	disConBtn.Resize(fyne.Size{Width: 50, Height: 100})
-	sendBtn := widget.NewButton("send", func() {///sendBtn
-		if sendtext.Text == "" {
+	ViewCtrl.DisConBtn.Resize(fyne.Size{Width: 50, Height: 100})
+	ViewCtrl.SendBtn = widget.NewButton("send", func() {///sendBtn
+		if ViewCtrl.Sendtext.Text == "" {
 			return
 		}
-		if handle.HandSendMsg(sendtext.Text) != ""{
+		if handle.HandSendMsg(ViewCtrl.Sendtext.Text) != ""{
 			return
 		}
-		sendtext.SetText("")
+		ViewCtrl.Sendtext.SetText("")
 	})
 
-	sendBtn.Resize(fyne.Size{Width: 50, Height: 100})
+	ViewCtrl.SendBtn.Resize(fyne.Size{Width: 50, Height: 100})
 	content := container.NewBorder(
-		container.NewVBox(container.NewHBox(nameBox,nameEntry),container.NewHBox(&serverLab,serEntry,conBtn,disConBtn,statuLable),sLine2),
-		container.NewVBox(sLine3,container.NewHBox(sendtext,sendBtn)),
-		container.NewHBox(userList,sLine1,sU),
+		container.NewVBox(container.NewHBox(nameBox,ViewCtrl.NameEntry),container.NewHBox(ViewCtrl.ServerLab,ViewCtrl.SerEntry,ViewCtrl.ConBtn,ViewCtrl.DisConBtn,ViewCtrl.StatuLable),ViewCtrl.SLine2),
+		container.NewVBox(ViewCtrl.SLine3,container.NewHBox(ViewCtrl.Sendtext,ViewCtrl.SendBtn)),
+		container.NewHBox(ViewCtrl.UserList,ViewCtrl.SLine1,sU),
 		nil)
 
 	myWin.SetContent(content)
@@ -111,8 +104,8 @@ func UpdataUserChat() {
 		select {
 		case <- handle.HChan.UserChatChan:
 			temp := ""
-			temp = ViewLable.UserChat.Text + "\n" + handle.HChan.UserChatMsg
-			ViewLable.UserChat.SetText(temp)
+			temp = ViewCtrl.UserChat.Text + "\n" + handle.HChan.UserChatMsg
+			ViewCtrl.UserChat.SetText(temp)
 		default:
 		}
 	}
@@ -122,8 +115,8 @@ func UpdatuserList()  {
 	for {
 		select {
 		case <- handle.HChan.UserListChan:
-			ViewLable.UserList.SetText("")
-			ViewLable.UserList.SetText(handle.HChan.UserListMsg)
+			ViewCtrl.UserList.SetText("")
+			ViewCtrl.UserList.SetText(handle.HChan.UserListMsg)
 		default:
 		}
 	}

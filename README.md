@@ -17,6 +17,7 @@
 ├── module                  #数据模型
 │   ├── const.go            #const数据
 │   └── handleChan.go 
+│   └── viewModule.go       
 ├   └── protobuf            #proto文件夹
 │     ├── com.pb.go
 │     └── com.proto
