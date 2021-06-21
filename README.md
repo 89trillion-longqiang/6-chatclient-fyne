@@ -30,11 +30,12 @@
 
 
 #代码逻辑分层
-| 层     | 文件夹|主要职责 |调用关系|
-| :----: | :----|:---- | :-----|
-|view    | /view|界面展示 |调用handle|
+| 层     | 文件夹  |主要职责 |调用关系|
+| :----: | :---- |:-----  | :-----|
+|view    | /view |界面展示   |调用handle module |
 |handle  | /handle|处理界面的数据 |调用router module 被 view调用|
 |router  | /router|负责与服务器连接|被handle调用|
+|module  | /module|数据模型 | 被view handle调用|
 
 #存储设计
 
@@ -54,7 +55,7 @@ go run main.go
 
 #使用方法
 ```
-运行后，输入username 与 server（ws://localhost:8080/ws后 点击con按钮 状态显示为OK后 
+运行后，输入username 与 server（ws://localhost:8080/ws)后 点击con按钮 状态显示为OK后 
 即可在下面的输入框输入信息，点击发送即可完成发送。
 ```
 #运行截图
