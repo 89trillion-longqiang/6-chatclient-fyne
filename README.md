@@ -15,14 +15,14 @@
 │   └── info.log
 ├── main.go                 #代码入口
 ├── module                  #数据模型
-│   ├── const.go      #const数据
+│   ├── const.go            #const数据
 │   └── handleChan.go 
-├── protobuf                #proto文件夹
-│   ├── com.pb.go
-│   └── com.proto
+├   └── protobuf            #proto文件夹
+│     ├── com.pb.go
+│     └── com.proto
 ├── router                  #路由
 │   └── router.go
-└── view                    #界面显示文件 夹
+└── view                    #界面显示文件夹
     └── view.go
 
 ```
