@@ -65,3 +65,6 @@ go run main.go
 google.golang.org/protobuf      通信数据的传输格式 protobuf
 fyne.io/fyne                    GUI界面的设计与实现
 ```
+
+#流程图    
+![xxx](pic/flowchart.png)
