@@ -9,8 +9,8 @@
 ```
 ├── README.md               #介绍
 ├── go.mod
-├── handle                  #处理router的请求
-│   └── handle.go
+├── controller              #处理view转发的数据
+│   └── controller.go
 ├── log                     #日志文件夹
 │   └── info.log
 ├── main.go                 #代码入口
@@ -21,8 +21,6 @@
 ├   └── protobuf            #proto文件夹
 │     ├── com.pb.go
 │     └── com.proto
-├── router                  #路由
-│   └── router.go
 └── view                    #界面显示文件夹
     └── view.go
 
@@ -32,10 +30,9 @@
 #代码逻辑分层
 | 层     | 文件夹  |主要职责 |调用关系|
 | :----: | :---- |:-----  | :-----|
-|view    | /view |界面展示   |调用handle module |
-|handle  | /handle|处理界面的数据 |调用router module 被 view调用|
-|router  | /router|负责与服务器连接|被handle调用|
-|module  | /module|数据模型 | 被view handle调用|
+|view    | /view |界面展示   |调用controller |
+|controller | /controller|处理界面的数据，并将处理后的数据发送回view|调用module|
+|module  | /module|数据模型 | 被controller调用|
 
 #存储设计
 
@@ -70,3 +67,8 @@ fyne.io/fyne                    GUI界面的设计与实现
 
 #流程图    
 ![xxx](pic/flowchart.png)
+
+#测试截图
+![xxx](pic/test1.png)
+![xxx](pic/test2.png)
+![xxx](pic/test3.png)
