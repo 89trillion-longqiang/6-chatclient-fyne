@@ -3,13 +3,14 @@ package view
 import (
 	"fmt"
 
-	"chatClient/controller"
-	"chatClient/module"
 	"fyne.io/fyne"
 	"fyne.io/fyne/app"
 	"fyne.io/fyne/container"
 	"fyne.io/fyne/layout"
 	"fyne.io/fyne/widget"
+
+	"chatClient/controller"
+	"chatClient/module"
 )
 
 var ViewCtrl  module.ViewCtrlModule

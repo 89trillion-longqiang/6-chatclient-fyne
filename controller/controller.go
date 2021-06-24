@@ -6,10 +6,11 @@ import (
 	"net/http"
 	"time"
 
-	"chatClient/module"
-	"chatClient/module/protobuf"
 	"github.com/gorilla/websocket"
 	"google.golang.org/protobuf/proto"
+
+	"chatClient/module"
+	"chatClient/module/protobuf"
 )
 
 var (
@@ -62,7 +63,7 @@ func HandSendMsg(msg string) string{
 		return "c *websocket.Conn is nil"
 	}
 	sendMsg ,_:= proto.Marshal(&protobuf.Communication{Class: "Talk",Msg: msg})
-	err := c.WriteMessage(1,sendMsg)
+	err := c.WriteMessage(module.Talk,sendMsg)
 	if err != nil{
 		return err.Error()
 	}
