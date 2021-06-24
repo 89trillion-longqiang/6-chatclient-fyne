@@ -3,7 +3,7 @@ package view
 import (
 	"fmt"
 
-	"chatClient/handle"
+	"chatClient/controller"
 	"chatClient/module"
 	"fyne.io/fyne"
 	"fyne.io/fyne/app"
@@ -23,7 +23,7 @@ func SetUpView() fyne.Window{
 	ViewCtrl.NameEntry = widget.NewEntry()
 	ViewCtrl.NameEntry.SetPlaceHolder("input name")
 	ViewCtrl.NameEntry.OnChanged = func(content string) {
-		handle.SetName(ViewCtrl.NameEntry.Text)
+		controller.SetName(ViewCtrl.NameEntry.Text)
 		fmt.Println("name:", ViewCtrl.NameEntry.Text, "entered")
 	}
 	nameBox := widget.NewHBox(widget.NewLabel("Name"), layout.NewSpacer(), ViewCtrl.NameEntry)
@@ -32,7 +32,7 @@ func SetUpView() fyne.Window{
 	ViewCtrl.SerEntry = widget.NewEntry()
 	ViewCtrl.SerEntry.SetPlaceHolder("input  server        ")
 	ViewCtrl.SerEntry.OnChanged = func(content string) {
-		handle.SetServer(ViewCtrl.SerEntry.Text)
+		controller.SetServer(ViewCtrl.SerEntry.Text)
 		fmt.Println("name:", ViewCtrl.SerEntry.Text, "entered")
 	}
 
@@ -59,10 +59,10 @@ func SetUpView() fyne.Window{
 	ViewCtrl.Sendtext = widget.NewEntry()
 	ViewCtrl.Sendtext.SetPlaceHolder("Input")
 	ViewCtrl.ConBtn = widget.NewButton("con", func() {///conBtn
-		if handle.Username == "" || handle.Server == ""{
+		if controller.Username == "" || controller.Server == ""{
 			return
 		}
-		if handle.HandleSetupHttp() != "" {
+		if controller.HandleSetupHttp() != "" {
 			return
 		}
 		ViewCtrl.StatuLable.SetText("status:OK")
@@ -72,7 +72,7 @@ func SetUpView() fyne.Window{
 		if ViewCtrl.StatuLable.Text != "status:OK" {
 			return
 		}
-		if handle.HandleDisCon() != ""{
+		if controller.HandleDisCon() != ""{
 			return
 		}
 		ViewCtrl.StatuLable.SetText("status:NO")
@@ -82,7 +82,7 @@ func SetUpView() fyne.Window{
 		if ViewCtrl.Sendtext.Text == "" {
 			return
 		}
-		if handle.HandSendMsg(ViewCtrl.Sendtext.Text) != ""{
+		if controller.HandSendMsg(ViewCtrl.Sendtext.Text) != ""{
 			return
 		}
 		ViewCtrl.Sendtext.SetText("")
@@ -102,9 +102,9 @@ func SetUpView() fyne.Window{
 func UpdataUserChat() {
 	for {
 		select {
-		case <- handle.HChan.UserChatChan:
+		case <- controller.HChan.UserChatChan:
 			temp := ""
-			temp = ViewCtrl.UserChat.Text + "\n" + handle.HChan.UserChatMsg
+			temp = ViewCtrl.UserChat.Text + "\n" + controller.HChan.UserChatMsg
 			ViewCtrl.UserChat.SetText(temp)
 		default:
 		}
@@ -114,9 +114,9 @@ func UpdataUserChat() {
 func UpdatuserList()  {
 	for {
 		select {
-		case <- handle.HChan.UserListChan:
+		case <- controller.HChan.UserListChan:
 			ViewCtrl.UserList.SetText("")
-			ViewCtrl.UserList.SetText(handle.HChan.UserListMsg)
+			ViewCtrl.UserList.SetText(controller.HChan.UserListMsg)
 		default:
 		}
 	}
